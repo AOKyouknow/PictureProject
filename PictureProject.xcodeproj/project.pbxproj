@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0007D1482E8DBC4E00F57884 /* HZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0007D1482E8DBC4E00F57884 /* PictureProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictureProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0007D14B2E8DBC4E00F57884 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0007D14D2E8DBC4E00F57884 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0007D1522E8DBC4E00F57884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		0007D13F2E8DBC4E00F57884 = {
 			isa = PBXGroup;
 			children = (
-				0007D14A2E8DBC4E00F57884 /* HZ */,
+				0007D14A2E8DBC4E00F57884 /* PictureProject */,
 				0007D1492E8DBC4E00F57884 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,12 +64,12 @@
 		0007D1492E8DBC4E00F57884 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0007D1482E8DBC4E00F57884 /* HZ.app */,
+				0007D1482E8DBC4E00F57884 /* PictureProject.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0007D14A2E8DBC4E00F57884 /* HZ */ = {
+		0007D14A2E8DBC4E00F57884 /* PictureProject */ = {
 			isa = PBXGroup;
 			children = (
 				0007D15F2E8DC1D000F57884 /* Supporting */,
@@ -78,7 +78,7 @@
 				0007D16A2E9126F200F57884 /* C */,
 				0007D1592E8DBC5100F57884 /* Info.plist */,
 			);
-			path = HZ;
+			path = PictureProject;
 			sourceTree = "<group>";
 		};
 		0007D15F2E8DC1D000F57884 /* Supporting */ = {
@@ -126,9 +126,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0007D1472E8DBC4E00F57884 /* HZ */ = {
+		0007D1472E8DBC4E00F57884 /* PictureProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0007D15C2E8DBC5100F57884 /* Build configuration list for PBXNativeTarget "HZ" */;
+			buildConfigurationList = 0007D15C2E8DBC5100F57884 /* Build configuration list for PBXNativeTarget "PictureProject" */;
 			buildPhases = (
 				0007D1442E8DBC4E00F57884 /* Sources */,
 				0007D1452E8DBC4E00F57884 /* Frameworks */,
@@ -138,9 +138,9 @@
 			);
 			dependencies = (
 			);
-			name = HZ;
+			name = PictureProject;
 			productName = HZ;
-			productReference = 0007D1482E8DBC4E00F57884 /* HZ.app */;
+			productReference = 0007D1482E8DBC4E00F57884 /* PictureProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -158,7 +158,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0007D1432E8DBC4E00F57884 /* Build configuration list for PBXProject "HZ" */;
+			buildConfigurationList = 0007D1432E8DBC4E00F57884 /* Build configuration list for PBXProject "PictureProject" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -171,7 +171,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0007D1472E8DBC4E00F57884 /* HZ */,
+				0007D1472E8DBC4E00F57884 /* PictureProject */,
 			);
 		};
 /* End PBXProject section */
@@ -358,6 +358,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HZ/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PictureProject;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -368,7 +369,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Alikyouknow.HZ;
+				PRODUCT_BUNDLE_IDENTIFIER = Alikyouknow.PictureProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -385,6 +386,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HZ/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PictureProject;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -395,7 +397,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Alikyouknow.HZ;
+				PRODUCT_BUNDLE_IDENTIFIER = Alikyouknow.PictureProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -406,7 +408,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0007D1432E8DBC4E00F57884 /* Build configuration list for PBXProject "HZ" */ = {
+		0007D1432E8DBC4E00F57884 /* Build configuration list for PBXProject "PictureProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0007D15A2E8DBC5100F57884 /* Debug */,
@@ -415,7 +417,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0007D15C2E8DBC5100F57884 /* Build configuration list for PBXNativeTarget "HZ" */ = {
+		0007D15C2E8DBC5100F57884 /* Build configuration list for PBXNativeTarget "PictureProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0007D15D2E8DBC5100F57884 /* Debug */,
