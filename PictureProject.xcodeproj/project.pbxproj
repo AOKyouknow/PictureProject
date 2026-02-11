@@ -118,10 +118,10 @@
 			isa = PBXGroup;
 			children = (
 				0007D1602E8DC20000F57884 /* One.swift */,
-				0007D1642E8DC35E00F57884 /* TabController.swift */,
 				0007D16D2E93138A00F57884 /* UnsplashService.swift */,
 				0007D1622E8DC20E00F57884 /* Two.swift */,
 				0097ABD72F371911009CB197 /* UnplashManager.swift */,
+				0007D1642E8DC35E00F57884 /* TabController.swift */,
 			);
 			path = C;
 			sourceTree = "<group>";
