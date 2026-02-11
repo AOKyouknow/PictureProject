@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK: - Модель фотографии
-struct UnsplashPhoto: Decodable {
-    let id: String
-    let urls: PhotoURLs
-    let user: User
-}
+//struct UnsplashPhoto: Decodable {
+//    let id: String
+//    let urls: PhotoURLs
+//    let user: User
+//}
 
 // MARK: - Модель URL фотографий разных размеров
 // Decodable, т.к. работаем только с получением данных.

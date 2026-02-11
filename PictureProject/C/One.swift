@@ -24,7 +24,7 @@ class One: UIViewController {
     //переменные для поиска
     private let searchBar = UISearchBar()
     private let searchButton = UIButton(type: .system)
-    
+    private var searchQuery = ""
     
     
     //MARK: - Components
@@ -43,14 +43,15 @@ class One: UIViewController {
         self.view.backgroundColor = .systemRed //TODO: 1 - можно без self
         
         setupUI()
-        setupSearchBar()// добавляем поиск бар) (бара?))))
-        
+            //setupSearchBar()// добавляем поиск бар) (бара?))))
+        setupSearchBar()
         //это прописываю после регистрации cell. сделал модель, зарегистрировал, теперь сюжа прописываю.
         self.collectionView.dataSource = self //TODO: - чтобы показывать ячейки
         self.collectionView.delegate = self//как только прописал эти вещи, потребовалось создать протокол под классом.TODO: для того, чтобы можно было работать с ячейками в целом, обрабатывать тачи и прочее
         self.collectionView.prefetchDataSource = self
         
-        loadRandomPhotos()
+        //loadRandomPhotos()
+        loadPhotos()
         
     }
     // отменяем Task при уходе с экрана
@@ -59,63 +60,114 @@ class One: UIViewController {
            loadTask?.cancel() // Отменяем текущую загрузку
        }
 // MARK: - ЗАГРУЗКА ИЗОБРАЖЕНИЙ. метод с async/await
-        private func loadRandomPhotos() {
-            guard !isLoading else {
-                print("Уже грузится")
-                return
-            }
-            
-            print("Начинается загрузку страницы \(currentPage)")
-            isLoading = true
-            
-            // ОТМЕНЯЕМ предыдущую задачу если она есть
-            loadTask?.cancel()
-            
-            // СОЗДАЕМ новую Task
-            loadTask = Task {
-                do {
-                    // Загружаем фото асинхронно
-                    let downloadedImages = try await unsplashService.fetchRandomPhotosAsync(count: photosPerPage)
+//        private func loadRandomPhotos() {
+//            guard !isLoading else {
+//                print("Уже грузится")
+//                return
+//            }
+//            
+//            print("Начинается загрузку страницы \(currentPage)")
+//            isLoading = true
+//            
+//            // ОТМЕНЯЕМ предыдущую задачу если она есть
+//            loadTask?.cancel()
+//            
+//            // СОЗДАЕМ новую Task
+//            loadTask = Task {
+//                do {
+//                    // Загружаем фото асинхронно
+//                    let downloadedImages = try await unsplashService.fetchRandomPhotosAsync(count: photosPerPage)
+//                    
+//                    // проверяем не отменили ли задачу
+//                    guard !Task.isCancelled else {
+//                        print("Задача отменена")
+//                        return
+//                    }
+//                    
+//                    // Обновляем UI в главном потоке
+//                    await MainActor.run {
+//                        self.isLoading = false
+//                        
+//                        if self.currentPage == 1 {
+//                            self.images = downloadedImages
+//                        } else {
+//                            self.images.append(contentsOf: downloadedImages)
+//                        }
+//                        
+//                        self.currentPage += 1
+//                        self.collectionView.reloadData()
+//                        
+//                        print("Страница \(self.currentPage - 1) загружена: \(downloadedImages.count) фото")
+//                    }
+//                    
+//                } catch {
+//                    // Обработка ошибок
+//                    guard !Task.isCancelled else {
+//                        print("Задача отменена (ошибка)")
+//                        return
+//                    }
+//                    
+//                    await MainActor.run {
+//                        self.isLoading = false
+//                        print("Ошибка загрузки: \(error)")
+//                    }
+//                }
+//            }
+//        }
+        
+    private func loadPhotos() {
+        guard !isLoading else { return }
+        
+        isLoading = true
+        loadTask?.cancel()
+        
+        loadTask = Task {
+            do {
+                let downloadedImages: [UIImage]
+                
+                // Если есть поисковый запрос - ищем, если нет - случайные
+                if searchQuery.isEmpty {
+                    downloadedImages = try await unsplashService.fetchRandomPhotosAsync(count: photosPerPage)
+                } else {
+                    downloadedImages = try await unsplashService.searchPhotosAsync(
+                        query: searchQuery,
+                        page: currentPage,
+                        perPage: photosPerPage
+                    )
+                }
+                
+                await MainActor.run {
+                    self.isLoading = false
                     
-                    // проверяем не отменили ли задачу
-                    guard !Task.isCancelled else {
-                        print("Задача отменена")
-                        return
+                    if self.currentPage == 1 {
+                        self.images = downloadedImages
+                    } else {
+                        self.images.append(contentsOf: downloadedImages)
                     }
                     
-                    // Обновляем UI в главном потоке
-                    await MainActor.run {
-                        self.isLoading = false
-                        
-                        if self.currentPage == 1 {
-                            self.images = downloadedImages
-                        } else {
-                            self.images.append(contentsOf: downloadedImages)
-                        }
-                        
-                        self.currentPage += 1
-                        self.collectionView.reloadData()
-                        
-                        print("Страница \(self.currentPage - 1) загружена: \(downloadedImages.count) фото")
-                    }
-                    
-                } catch {
-                    // Обработка ошибок
-                    guard !Task.isCancelled else {
-                        print("Задача отменена (ошибка)")
-                        return
-                    }
-                    
-                    await MainActor.run {
-                        self.isLoading = false
-                        print("Ошибка загрузки: \(error)")
-                    }
+                    self.currentPage += 1
+                    self.collectionView.reloadData()
+                }
+            } catch {
+                await MainActor.run {
+                    self.isLoading = false
                 }
             }
         }
-        
+    }
+
+    // Старый метод используем как обертку для сброса
+//    private func loadRandomPhotos() {
+//        currentPage = 1
+//        loadPhotos()
+//    }
+    
+
+// MARK: - завершение функции Loading Random Photo!!!!!!!!!!!!
+    
         private func loadNextPage() {
-            loadRandomPhotos()
+            //loadRandomPhotos()
+            loadPhotos()
         }
         
   
@@ -123,13 +175,62 @@ class One: UIViewController {
         // установил constrains
         self.view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false//это необходимо т.к. до констрейнтов использовались так называемые маски, и как только появились констрейнты, айос создали переход с масок на констрейнты с помощью данной переменной, автоматический переход. Когда мы делаем false мы говорим - автоматически не переходим с масок на констрейнты, мы задаем их сами (ниже).
-        NSLayoutConstraint.activate([ //многоо self? команды UIKit для границ. обязательные? -да
-            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+//        NSLayoutConstraint.activate([ //многоо self? команды UIKit для границ. обязательные? -да
+//            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
+//            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+//            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+//        ])
+//// убираем констрейты из-за конфликта. из-за них не видно бар!!!
+    }
+    
+ // MARK: - setup searchBAR
+    private func setupSearchBar() {
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+            searchButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.backgroundColor = .white
+        view.addSubview(searchButton)// Добавление на view
+        searchBar.delegate = self
+        searchBar.placeholder = "Поиск..."
+        searchBar.showsCancelButton = true
+        view.addSubview(searchBar)
+        
+        
+        
+        
+        // Просто добавьте searchBar над collectionView
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    //из расширения
+    //поиск
+    //    private let searchBar = UISearchBar()
+    //    private let searchButton = UIButton(type: .system)
+    //    ПЕРЕМЕННЫЕ ДЛЯ ПОИСКА ПРИШЛОСЬ ПЕРЕМЕСТИТЬ В ОБЪЯВЛЕНИЕ КЛАССА.
+//    private func setupSearchBar() { /////////////////// ДОЛЖНА БЫТЬ В КЛАССЕ!!!!!!
+//        view.backgroundColor = .white
+//        searchBar.delegate = self
+//        searchBar.translatesAutoresizingMaskIntoConstraints = false
+//        searchBar.searchBarStyle = .default
+//        view.addSubview(searchBar)// Добавление на view
+//        view.addSubview(searchButton)// Добавление на view
+//        NSLayoutConstraint.activate([
+//            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+//        ])
+//    }
+    
 }
   // MARK: - ПРОТОКОЛЫ
 //Создаём ячейки.
@@ -215,34 +316,30 @@ extension One: UICollectionViewDataSourcePrefetching {
 }
 
 extension One: UISearchBarDelegate{
-    //поиск
-//    private let searchBar = UISearchBar()
-//    private let searchButton = UIButton(type: .system)
-//    ПЕРЕМЕННЫЕ ДЛЯ ПОИСКА ПРИШЛОСЬ ПЕРЕМЕСТИТЬ В ОБЪЯВЛЕНИЕ КЛАССА.
     
-    private func setupSearchBar() {
-        view.backgroundColor = .white
-        searchBar.delegate = self
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.searchBarStyle = .default
-        view.addSubview(searchBar)// Добавление на view
-        view.addSubview(searchButton)// Добавление на view
-        NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
         
+        
+        
+        
+        //три новых метода!!!!!!!!
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            print("🔍 Поиск: \(searchText)") // Добавьте для отладки
+            searchQuery = searchText
+            currentPage = 1
+            loadPhotos()
+        }
+        
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            print("❌ Отмена поиска")
+            searchQuery = ""
+            searchBar.text = ""
+            currentPage = 1
+            loadPhotos()
+        }
+        
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            print("✅ Поиск выполнен: \(searchBar.text ?? "")")
+            searchBar.resignFirstResponder()
+        }
     }
-    
-    
-    
-    
-    
 
-
-    
-    
-    
-    
-}
