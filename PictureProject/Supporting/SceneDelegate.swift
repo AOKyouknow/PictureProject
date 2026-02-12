@@ -17,8 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 let window = UIWindow(windowScene: windowScene)
                 //let viewController = ViewController()
-                window.rootViewController = TabController()
-                
+                window.rootViewController = TabBarController()
                 self.window = window
                 window.makeKeyAndVisible()
         //здесь что-то нужно написать. в видео чувак пользуется автозаполнением, у меня такого нет))) ЧТО-ТО С ОКНАМИ windiw

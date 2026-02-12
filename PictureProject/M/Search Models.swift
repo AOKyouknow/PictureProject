@@ -7,18 +7,19 @@
 
 import Foundation
 // MARK: - Models for Search
-struct UnsplashSearchResult: Codable {
+struct UnsplashSearchResult: Decodable {
     let total: Int
     let total_pages: Int
     let results: [UnsplashPhoto]
 }
 
-struct UnsplashPhoto: Codable {
+struct UnsplashPhoto: Decodable {
     let id: String
     let urls: UnsplashPhotoURLs
+    let user: User
 }
 
-struct UnsplashPhotoURLs: Codable {
+struct UnsplashPhotoURLs: Decodable {
     let raw: String
     let full: String
     let regular: String
