@@ -45,11 +45,10 @@ enum UnsplashEndpoint {
 
 // URLBuilder — это фасад (Facade Pattern)
 class URLBuilder {
-    // Базовый адрес API, общий для всех запросов
-    private let baseURL = "https://api.unsplash.com"
+
     func buildURL(for endpoint: UnsplashEndpoint) -> URL? {
         // Создаем компоненты URL из базового адреса
-        var components = URLComponents(string: baseURL)
+        var components = URLComponents(string: APIConfig.baseURL)
         // Добавляем путь эндпоинта
         components?.path = endpoint.path
         // Добавляем query-параметры

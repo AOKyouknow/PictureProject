@@ -22,6 +22,8 @@
 		0009B9E12F1112CF00E82DCC /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0009B9E02F1112CF00E82DCC /* Pagination.swift */; };
 		007BC4502F2E104000ABFB6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BC44F2F2E104000ABFB6C /* Constants.swift */; };
 		0097ABE42F3D1140009CB197 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097ABE32F3D1140009CB197 /* URLBuilder.swift */; };
+		0097ABE62F3D9EFF009CB197 /* APICongig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097ABE52F3D9EFF009CB197 /* APICongig.swift */; };
+		0097ABE82F3DA2BF009CB197 /* Search Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097ABE72F3DA2BF009CB197 /* Search Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		0009B9E02F1112CF00E82DCC /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		007BC44F2F2E104000ABFB6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0097ABE32F3D1140009CB197 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
+		0097ABE52F3D9EFF009CB197 /* APICongig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICongig.swift; sourceTree = "<group>"; };
+		0097ABE72F3DA2BF009CB197 /* Search Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search Models.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 				0007D14B2E8DBC4E00F57884 /* AppDelegate.swift */,
 				0007D14D2E8DBC4E00F57884 /* SceneDelegate.swift */,
 				0007D1542E8DBC5100F57884 /* Assets.xcassets */,
+				0097ABE52F3D9EFF009CB197 /* APICongig.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 				0009B9DD2F0E5D2B00E82DCC /* NetworkError.swift */,
 				0009B9E02F1112CF00E82DCC /* Pagination.swift */,
 				007BC44F2F2E104000ABFB6C /* Constants.swift */,
+				0097ABE72F3DA2BF009CB197 /* Search Models.swift */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -207,10 +213,12 @@
 			files = (
 				0007D1652E8DC35E00F57884 /* TabController.swift in Sources */,
 				007BC4502F2E104000ABFB6C /* Constants.swift in Sources */,
+				0097ABE82F3DA2BF009CB197 /* Search Models.swift in Sources */,
 				0007D1702E93151A00F57884 /* UnsplashPhoto.swift in Sources */,
 				0007D16C2E91C8C200F57884 /* CustomCollectionViewCell.swift in Sources */,
 				0007D14C2E8DBC4E00F57884 /* AppDelegate.swift in Sources */,
 				0097ABE42F3D1140009CB197 /* URLBuilder.swift in Sources */,
+				0097ABE62F3D9EFF009CB197 /* APICongig.swift in Sources */,
 				0007D1632E8DC20E00F57884 /* Two.swift in Sources */,
 				0007D1612E8DC20000F57884 /* One.swift in Sources */,
 				0009B9DE2F0E5D2B00E82DCC /* NetworkError.swift in Sources */,
